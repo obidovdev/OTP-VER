@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OTP Tasdiqlash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0f172a] text-slate-100 min-h-screen flex items-center justify-center selection:bg-indigo-500 selection:text-white">
+
+    <div class="w-full max-w-md p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-slate-800 shadow-2xl relative overflow-hidden">
+
+        <!-- Orqa fondagi yorug'lik effekti (Glow) -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <h2 class="text-2xl font-bold tracking-tight mb-2 text-center bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">OTP Kodni Tasdiqlash</h2>
+        <p class="text-xs text-slate-400 text-center mb-6">Email pochtangizga yuborilgan 6 xonali kodni kiriting</p>
+
+        <!-- Xabarlar (Messages) -->
+        {% if messages %}
+            <div class="mb-6 space-y-2">
+                {% for message in messages %}
+                    <div class="p-4 rounded-2xl text-sm border backdrop-blur-md transition-all {% if message.tags == 'error' %} bg-red-500/10 border-red-500/20 text-red-400 {% elif message.tags == 'success' %} bg-emerald-500/10 border-emerald-500/20 text-emerald-400 {% else %} bg-indigo-500/10 border-indigo-500/20 text-indigo-400 {% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Forma -->
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+
+            <div class="[&>p>label]:block [&>p>label]:text-xs [&>p>label]:font-medium [&>p>label]:text-slate-400 [&>p>label]:mb-1 [&>p>input]:w-full [&>p>input]:px-4 [&>p>input]:py-3 [&>p>input]:rounded-xl [&>p>input]:bg-slate-950/50 [&>p>input]:border [&>p>input]:border-slate-800 [&>p>input]:text-slate-100 [&>p>input]:focus:outline-none [&>p>input]:focus:border-indigo-500 [&>p>input]:focus:ring-1 [&>p>input]:focus:ring-indigo-500 [&>p>input]:transition-all [&>p>input]:text-center [&>p>input]:tracking-widest [&>p>input]:text-lg">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-medium shadow-lg shadow-indigo-500/25 active:scale-[0.98] transition-all">
+                Tasdiqlash
+            </button>
+        </form>
+
+    </div>
+
+</body>
+</html>
